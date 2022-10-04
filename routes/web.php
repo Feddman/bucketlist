@@ -2,6 +2,8 @@
 
 use Illuminate\Support\Facades\Route;
 use \App\Models\Item;
+use \App\Http\Controllers\ItemsController;
+use \App\Http\Controllers\PagesController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -13,21 +15,13 @@ use \App\Models\Item;
 |
 */
 
-Route::get('/', function () {
-    $items = Item::all();
-    return view('home', [
-        'items' => $items
-    ]);
-});
+Route::get('/', [PagesController::class, 'home']);
 
-Route::get('/items/create', function() {
-    return view('create');
-});
+Route::get('/dashboard', [PagesController::class, 'dashboard'])
+->middleware(['auth'])
+->name('dashboard');
 
-
-
-Route::get('/dashboard', function () {
-    return view('dashboard');
-})->middleware(['auth'])->name('dashboard');
+Route::resource('items', ItemsController::class);
 
 require __DIR__.'/auth.php';
+

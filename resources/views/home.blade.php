@@ -11,11 +11,16 @@
 <body>
     <div class="container">
         <h1>My bucket list!</h1>
+        @if( session('message') )
+            <p class="alert alert-success">{{ session('message') }}</p>
+        @endif
+
         <ul class="list-group">
             @foreach( $items as $item )
                 <li class="list-group-item"> {{ $item->title }} </li>
             @endforeach
         </ul>
+        <a href="{{route('items.create')}}" class="btn btn-primary">Create new Item!</a>
     </div>
 
 </body>

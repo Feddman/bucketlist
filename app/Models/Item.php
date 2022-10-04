@@ -9,4 +9,6 @@ class Item extends Model
 {
     use HasFactory;
     protected $table = 'items';
+    // protected $fillable = ['description', 'title', 'prio'];
+    protected $guarded = [];
 }

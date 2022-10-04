@@ -12,8 +12,8 @@
     <div class="container">
         <h1>My bucket list!</h1>
         <h2>Create bucket list item</h2>
-        <form method="post" action="">
-
+        <form method="post" action="{{route('items.store')}}">
+            @csrf
             <div class="form-group">
                 <label for="">Title</label>
                 <input type="text" name="title" class="form-control" >
