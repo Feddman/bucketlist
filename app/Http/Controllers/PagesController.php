@@ -8,7 +8,11 @@ use \App\Models\Item;
 class PagesController extends Controller
 {
     public function home() {
-        return action(itemscontroller, 'index')
+
+        $items = Item::orderBy('prio')->get();
+        return view('home', [
+            'items' => $items
+        ]);
 
     }
 
