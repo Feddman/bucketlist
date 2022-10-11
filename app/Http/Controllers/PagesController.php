@@ -8,11 +8,7 @@ use \App\Models\Item;
 class PagesController extends Controller
 {
     public function home() {
-
-        $items = Item::all();
-        return view('home', [
-            'items' => $items
-        ]);
+        return action(itemscontroller, 'index')
 
     }
 

@@ -14,7 +14,10 @@ class ItemsController extends Controller
      */
     public function index()
     {
-        $items = Item::all();
+        $items = Item::orderBy('prio')
+            ->get();
+
+
         return view('home', [
             'items' => $items
         ]);
@@ -52,7 +55,10 @@ class ItemsController extends Controller
      */
     public function show($id)
     {
-        //
+        $item = Item::findOrFail($id);
+        return view('items.show', [
+            'item' => $item
+        ]);
     }
 
     /**
@@ -63,7 +69,10 @@ class ItemsController extends Controller
      */
     public function edit($id)
     {
-        //
+        $item = Item::findOrFail($id);
+        return view('items.edit', [
+            'item' => $item
+        ]);
     }
 
     /**
@@ -75,7 +84,9 @@ class ItemsController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $item = Item::findOrFail($id);
+        $item->update($request->except(['_token', '_method']));
+        return back();
     }
 
     /**
@@ -86,6 +97,7 @@ class ItemsController extends Controller
      */
     public function destroy($id)
     {
-        //
+        Item::destroy($id);
+        return back();
     }
 }
