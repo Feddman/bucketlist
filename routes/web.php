@@ -22,6 +22,7 @@ Route::get('/dashboard', [PagesController::class, 'dashboard'])
 ->name('dashboard');
 
 Route::resource('items', ItemsController::class);
+Route::put('items/{item}/markDone', [ItemsController::class, 'markDone'])->name('items.markDone');
 
 require __DIR__.'/auth.php';
 

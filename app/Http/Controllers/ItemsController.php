@@ -14,13 +14,7 @@ class ItemsController extends Controller
      */
     public function index()
     {
-        $items = Item::orderBy('prio')
-            ->get();
-
-
-        return view('home', [
-            'items' => $items
-        ]);
+        return view('home');
     }
 
     /**
@@ -99,5 +93,14 @@ class ItemsController extends Controller
     {
         Item::destroy($id);
         return back();
+    }
+
+    public function markDone(Request $request, $id) {
+
+        $item = Item::findOrFail($id);
+        $item->completed_at = now();
+        $item->save();
+        return back()->with('message', 'Item succesvol op compleet gezet');
+
     }
 }
